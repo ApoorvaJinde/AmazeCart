@@ -1,0 +1,137 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+  <link href="{% static 'css/base.css' %}" rel="stylesheet">
+ 
+  
+  <title>{% block title %}My shop{% endblock %}</title>
+  
+</head>
+<style>
+  .navbar-nav .search{
+    float:left;
+    
+  }
+  .dot{
+    height: 25px;
+    width: 25px;
+    background-color: rgb(223, 41, 41);
+    border-radius: 50%;
+    display: inline-block;
+  }
+  
+      
+        .geeks img {
+            
+            transition: 0.5s all ease-in-out;
+        }
+      
+        .geeks:hover img {
+            transform: scale(1.5);
+        }
+    
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{% static '/css/style.css'%}">
+<link rel="stylesheet" href="{% static '/css/bootstrap.min.css'%}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+<body>
+
+
+  <header>
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarsExample02">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              
+<!-- Sidebar -->
+<div class="w3-sidebar w3-bar-block w3-border-right" style="display:none" id="mySidebar" width="200px;">
+  <button onclick="w3_close()" class="w3-bar-item w3-large">Close &times;</button>
+  <a href="{% url 'profile' %}" class="w3-bar-item w3-button"> Profile</a>
+  <a href="{% url 'logout' %}" class="w3-bar-item w3-button"> Logout</a>
+  <a href="{% url 'orders:order_detail' %}" class="w3-bar-item w3-button">Your orders</a>
+  <a href="{% url 'cart:cart_detail' %}"class="w3-bar-item w3-button" >
+    <img src="https://image.shutterstock.com/image-vector/shopping-cart-icon-flat-style-260nw-1558548761.jpg" width="30" height="30">   Cart</a>
+  <h3>Shop by categories</h3>
+    <ul>
+      <li {% if not category %}class="selected"{% endif %}>
+        <a href="{% url 'shop:product_list' %}" class="w3-bar-item w3-button">All</a>
+      </li>
+      {% for c in categories %}
+        <li {% if category.slug == c.slug %}class="selected"{% endif %}>
+          <a href="{{ c.get_absolute_url }}" class="w3-bar-item w3-button">{{ c.name }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  
+  
+</div>
+
+<!-- Page Content -->
+<div class="w3-teal">
+  <button class="w3-button w3-teal w3-xlarge" onclick="w3_open()">☰</button>
+  
+</div>
+</li>    
+</ul>
+             
+
+            
+          <a class="navbar-brand mx-auto" href="{% url 'home' %}"><span class="mb-0 h1">AMAZKART</span></a>
+<br>
+           <!-- Navbar Right Side -->
+           <div class="navbar-nav" style="float: right;">
+
+             {% if user.is_authenticated %}
+             <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
+
+               <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+             
+            
+             {% else%}
+             <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+
+               <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+             
+             {% endif %}
+             <form method="POST" action="{% url 'searched'%}" class="form-inline my-2 my-lg-0">
+              {% csrf_token %}
+              <div class="search" style="float: right;">
+                <input type="search" placeholder="Search.." name='search'>
+                
+
+              <button type="submit"><i class="fa fa-search"></i></button>
+             </div>
+           </form>
+             
+          </div>
+        </div>
+      </nav>
+    </header>
+  
+  <div id="content">
+    {% block content %}
+    {% endblock %}
+  </div>
+  <script>
+    function w3_open() {
+      document.getElementById("mySidebar").style.display = "block";
+    }
+    
+    function w3_close() {
+      document.getElementById("mySidebar").style.display = "none";
+    }
+    </script>
+</body>
+</html>

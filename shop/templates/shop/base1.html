@@ -1,0 +1,106 @@
+
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+  <link href="{% static 'css/base.css' %}" rel="stylesheet">
+  
+  
+  <title>{% block title %}My shop{% endblock %}</title>
+  
+</head>
+
+</style>
+ 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{% static '/css/style.css'%}">
+<link rel="stylesheet" href="{% static '/css/bootstrap.min.css'%}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+<body>
+
+
+
+  <header>
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
+        
+    
+        <div class="collapse navbar-collapse" id="navbarsExample02">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              
+<!-- Sidebar -->
+<div class="w3-sidebar w3-bar-block w3-border-right" style="display:none" id="mySidebar">
+  <button onclick="w3_close()" class="w3-bar-item w3-large">Close &times;</button>
+  <a href="{% url 'front' %}" class="w3-bar-item w3-button">Home</a>
+  <a href="{% url 'login' %}" class="w3-bar-item w3-button">Login</a>
+  <a href="{% url 'register' %}" class="w3-bar-item w3-button">Register</a>
+ 
+    <h3>{% if category %}{{ category.name }}{% else %}View by categories{% endif %}</h3>
+    <ul>
+      
+    {% for c in categories %}
+    <li {% if category.slug == c.slug %}class="selected"{% endif %}>
+      <a href="{{ c.get_absolute_url }}see" class="w3-bar-item w3-button">{{ c.name }}</a>
+    
+         </li>
+    {% endfor %}
+    </ul>
+  
+  
+
+</div>
+
+<!-- Page Content -->
+<div class="w3-teal">
+  <button class="w3-button w3-teal w3-xlarge" onclick="w3_open()">☰</button>
+  
+</div>
+</li>    
+</ul>
+
+
+            
+          <a class="navbar-brand mx-auto" href="{% url 'front' %}"><span class="mb-0 h1">AMAZKART</span></a>
+
+           <!-- Navbar Right Side --><br>
+           
+           <div class="navbar-nav" style="float: right;">
+               <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+               <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+            <form method="POST" action="{% url 'search'%}" class="form-inline my-2 my-lg-0">
+            {% csrf_token %}
+               <div class="search" style="float: right;">
+               <input type="search" name="search" placeholder="Search.." name='search'>
+               
+               <button type="submit" class="fa fa-search">Search</button>
+              </div>
+            </form>
+           </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+ 
+  
+  <div id="content">
+    {% block content %}
+    {% endblock %}
+  </div>
+  <script>
+    function w3_open() {
+      document.getElementById("mySidebar").style.display = "block";
+    }
+    
+    function w3_close() {
+      document.getElementById("mySidebar").style.display = "none";
+    }
+    </script>
+</body>
+</html>

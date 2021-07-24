@@ -1,0 +1,41 @@
+{% extends "shop/base1.html" %}
+{% load static %}
+
+{% block title %}
+  {% if category %}{{ category.name }}{% else %}Products{% endif %}
+{% endblock %}
+
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+{% include 'shop/up.html' %}
+
+
+  
+  <div id="main" class="product_front">
+    <h1>{% if category %}{{ category.name }}{% else %}Products{% endif %}</h1>
+    {% for product in products %}
+      <div class="item">
+       <div class="card">
+          <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}" width="100px" height="200px">
+        
+        {{ product.name }}<br>
+        <p class="price">Rs {{product.price}}</p>
+      
+      </div>
+      </div>
+    {% endfor %}
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <a href="{% url 'front' %}"><button>BACK</button></a>
+
+  </div>
+{% endblock %}

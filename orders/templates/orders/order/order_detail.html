@@ -1,0 +1,36 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+{% block title %}
+  Your order list
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+  <h1>Your Orders</h1>
+  <table class="cart">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Order Date</th>
+        <th>Delivery date</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      {% for items in list %}
+           <tr>
+            <td>{{items.created}}</td>
+            <td >{{ items.delivered }}</td>
+            
+          </tr>
+        
+      {% endfor %}
+      
+    </tbody>
+  </table>
+  
+{% endblock %}

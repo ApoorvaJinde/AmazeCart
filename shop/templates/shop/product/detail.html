@@ -1,0 +1,31 @@
+{% extends "shop/base.html" %}
+
+{% load static %}
+
+{% block title %}
+  {{ product.name }}
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+  <div class="product-detail">
+    <div class="geeks">
+    <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}" width="100px" height="400px">
+   </div>
+    <h2><b>{{ product.name }}</b></h2>
+    <h3><b>Category: </b><a href="{{ product.category.get_absolute_url }}">{{ product.category }}</a></h3>
+    <h3><b>Price</b>: Rs {{ product.price }}</h3>
+    <form action="{% url 'cart:cart_add' product.id %}" method="post">
+      {{ cart_product_form }}
+      {% csrf_token %}
+      <input type="submit" value="Add to cart">
+      <br>
+    </form>
+    <h3><b>Brand:</b> {{product.brand}}</h3>
+    <h3><b>Color:</b> {{product.color}}</h3>
+    <h3><b>model:</b> {{product.model}}</h3>
+
+    <p {{ product.description|linebreaks }}></p>
+  </div>
+{% endblock %}

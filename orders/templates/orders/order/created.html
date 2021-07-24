@@ -1,0 +1,37 @@
+{% extends "shop/base.html" %}
+
+{% block title %}
+  Thank you
+{% endblock %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+{% block content %}
+
+
+  <h1>Thank you</h1>
+ 
+  <p>Your order has been successfully completed. </strong>.</p>
+  
+  <br><br>
+  <p>Your items will be delivered to</p>
+  <p><b>Name: </b>{{order.user}} </p>
+  
+  <p><b>Home number: </b>{{order.home_number}} </p>
+  <p><b>Street: </b>{{order.street}} </p>
+  <p><b>Area: </b>{{order.area}} </p>
+  <p><b>Postal Address: </b>{{order.postal_code}} </p>
+  <p><b>City: </b>{{order.city}} </p>
+  <p><b>District: </b>{{order.district}} </p>
+  <br><br>
+  <p><b>Ordered on :</b>{{order.created}} </p>
+  <p><b>Your order will be delivered on :</b>{{order.delivered}} </p>
+
+
+
+  
+  
+  <a href="{% url 'home' %}"><button>CONTINUE SHOPPING</button></a>
+
+  {% endblock %}
+

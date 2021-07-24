@@ -1,0 +1,48 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+{% block title %}
+  {% if category %}{{ category.name }}{% else %}Products{% endif %}
+{% endblock %}
+
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% include 'shop/up.html' %}
+
+<div id="subheader" style="float:right">
+  <div class="cart">
+    <img src="https://image.shutterstock.com/image-vector/shopping-cart-icon-flat-style-260nw-1558548761.jpg" width="50" height="50">
+    
+    {% with total_items=cart|length %}
+        {% if cart|length > 0 %}
+          
+          <a href="{% url 'cart:cart_detail' %}" >
+            {{ total_items }} item{{ total_items|pluralize }}, 
+            ${{ cart.get_total_price }}
+          </a>
+        {% else %}
+          Your cart is empty.
+        {% endif %}
+      {% endwith %}
+  </div>
+</div>
+<br>
+<br>
+
+
+  <div id="main" class="product-list">
+    <h1>{% if category %}{{ category.name }}{% else %}Products{% endif %}</h1>
+    {% for product in products %}
+    <div class="item">
+      <div class="card">
+        <a href="{{ product.get_absolute_url }}">
+          <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}" width="100px" height="200px">
+        </a>
+        <a href="{{ product.get_absolute_url }}">{{ product.name }}</a><br>
+        <p class="price">Rs {{product.price}}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+{% endblock %}
