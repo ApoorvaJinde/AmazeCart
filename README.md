@@ -5,7 +5,7 @@ An e-commerce platform which allows to shop and pay across a wide selection of d
 V.	IMPLEMENTATION DETAILS
 
 Home Page:
-
+![Test Image 3](/1.PNG)
  
 
 
